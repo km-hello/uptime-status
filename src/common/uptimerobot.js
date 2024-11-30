@@ -16,7 +16,7 @@ export async function GetMonitors(apikey, days) {
   ranges.push(`${start}_${end}`);
 
   const postdata = {
-    api_key: apikey,
+    // api_key: apikey,
     format: 'json',
     logs: 1,
     log_types: '1-2',
@@ -25,7 +25,7 @@ export async function GetMonitors(apikey, days) {
     custom_uptime_ranges: ranges.join('-'),
   };
 
-  const response = await axios.post('https://cors.status.org.cn/uptimerobot/v2/getMonitors', postdata, { timeout: 10000 });
+  const response = await axios.post('https://uptime-status.km-o.workers.dev', postdata, { timeout: 10000 });
   if (response.data.stat !== 'ok') throw response.data.error;
   return response.data.monitors.map((monitor) => {
 
@@ -56,7 +56,7 @@ export async function GetMonitors(apikey, days) {
     const result = {
       id: monitor.id,
       name: monitor.friendly_name,
-      url: monitor.url,
+      // url: monitor.url,
       average: average,
       daily: daily,
       total: total,
